@@ -1,6 +1,6 @@
 package com.rezolve.gistscanner.api.retrofit;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.rezolve.gistscanner.BuildConfig;
 

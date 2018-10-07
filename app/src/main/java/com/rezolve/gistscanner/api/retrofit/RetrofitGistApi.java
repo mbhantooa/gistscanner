@@ -1,6 +1,6 @@
 package com.rezolve.gistscanner.api.retrofit;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.rezolve.gistscanner.model.CreateGistResponse;
 import com.rezolve.gistscanner.model.GistCommentListResponse;
