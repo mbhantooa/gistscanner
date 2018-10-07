@@ -1,6 +1,6 @@
 package com.rezolve.gistscanner.api.retrofit;
 
-import androidx.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import java.io.IOException;
 
