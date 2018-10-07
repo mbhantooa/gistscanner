@@ -1,8 +1,8 @@
 package com.rezolve.gistscanner.model;
 
-import com.rezolve.gistscanner.api.GistApiResponse;
+import android.support.annotation.Nullable;
 
-import org.jetbrains.annotations.Nullable;
+import com.rezolve.gistscanner.api.GistApiResponse;
 
 import java.util.List;
 
