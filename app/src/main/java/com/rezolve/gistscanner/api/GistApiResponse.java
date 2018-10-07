@@ -20,7 +20,7 @@ public class GistApiResponse<R, E> {
         this.response = response;
         this.exception = exception;
 
-        if (response == null ^ exception == null) {
+        if ((response == null) == (exception == null)) {
             throw new IllegalArgumentException("At least one of R or E should not be null.");
         }
     }
@@ -40,5 +40,9 @@ public class GistApiResponse<R, E> {
                 "response=" + response +
                 ", exception=" + exception +
                 '}';
+    }
+
+    public boolean isSuccessful() {
+        return response != null && exception == null;
     }
 }
