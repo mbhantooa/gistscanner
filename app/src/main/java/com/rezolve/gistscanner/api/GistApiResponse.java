@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
  * @param <R> the API documented response type
  * @param <E> a convenient exception type
  */
-public class GistApiResponse<R, E> {
+public class GistApiResponse<R, E extends Throwable> {
     private final R response;
     private final E exception;
 
