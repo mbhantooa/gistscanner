@@ -14,6 +14,7 @@ import com.rezolve.gistscanner.di.ActivityScoped;
 import javax.inject.Inject;
 
 import dagger.android.support.DaggerFragment;
+import timber.log.Timber;
 
 @ActivityScoped
 public class MainFragment extends DaggerFragment {
@@ -46,7 +47,11 @@ public class MainFragment extends DaggerFragment {
                 .of(this, viewModelFactory)
                 .get(MainViewModel.class);
 
-        mainViewModel.micCheck();
+        mainViewModel.getCommentListResponse("92c0e856c23d0c8c6c26611028a32089", "mbhantooa", "P@ranoid2018")
+                .observe(this, (gistCommentListResponse -> {
+                    if (gistCommentListResponse != null)
+                        Timber.d("Found comments: " + gistCommentListResponse.toString());
+                }));
     }
 
 }

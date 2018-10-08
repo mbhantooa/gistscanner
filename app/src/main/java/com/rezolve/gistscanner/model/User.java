@@ -147,4 +147,28 @@ public class User {
     public Boolean getSiteAdmin() {
         return siteAdmin;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "login='" + login + '\'' +
+                ", id=" + id +
+                ", nodeId='" + nodeId + '\'' +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", gravatarId='" + gravatarId + '\'' +
+                ", url='" + url + '\'' +
+                ", htmlUrl='" + htmlUrl + '\'' +
+                ", followersUrl='" + followersUrl + '\'' +
+                ", followingUrl='" + followingUrl + '\'' +
+                ", gistsUrl='" + gistsUrl + '\'' +
+                ", starredUrl='" + starredUrl + '\'' +
+                ", subscriptionsUrl='" + subscriptionsUrl + '\'' +
+                ", organizationsUrl='" + organizationsUrl + '\'' +
+                ", reposUrl='" + reposUrl + '\'' +
+                ", eventsUrl='" + eventsUrl + '\'' +
+                ", receivedEventsUrl='" + receivedEventsUrl + '\'' +
+                ", type='" + type + '\'' +
+                ", siteAdmin=" + siteAdmin +
+                '}';
+    }
 }

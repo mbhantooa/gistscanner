@@ -1,6 +1,7 @@
 package com.rezolve.gistscanner.data;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.rezolve.gistscanner.model.CreateGistResponse;
 import com.rezolve.gistscanner.model.GistCommentListResponse;
@@ -17,20 +18,19 @@ import com.rezolve.gistscanner.model.GistCommentListResponse;
  */
 public interface IGistDataSource {
 
-    void setCallback(Callback callback);
-
     void getGistCommentList(@NonNull String gistId,
                             @NonNull String username,
-                            @NonNull String password);
+                            @NonNull String password,
+                            @Nullable Callback<GistCommentListResponse> callback);
 
     void createGistComment(@NonNull String gistId,
                            @NonNull String username,
                            @NonNull String password,
-                           @NonNull String comment);
+                           @NonNull String comment,
+                           @Nullable Callback<CreateGistResponse> callback);
 
-    interface Callback {
-        void onGistCommentListComplete(@NonNull GistCommentListResponse gistCommentListResponse);
-
-        void onGistCommentCreated(CreateGistResponse createGistResponse);
+    @FunctionalInterface
+    interface Callback<T> {
+        void onComplete(@NonNull T response);
     }
 }

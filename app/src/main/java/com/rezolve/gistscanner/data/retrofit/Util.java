@@ -44,6 +44,5 @@ public class Util {
         Retrofit retrofit = builder.build();
 
         return retrofit.create(serviceClass);
-
     }
 }
