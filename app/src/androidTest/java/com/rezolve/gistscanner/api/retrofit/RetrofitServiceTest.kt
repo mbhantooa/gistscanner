@@ -1,5 +1,7 @@
 package com.rezolve.gistscanner.api.retrofit
 
+import com.rezolve.gistscanner.data.retrofit.RetrofitService
+import com.rezolve.gistscanner.data.retrofit.Util
 import com.rezolve.gistscanner.model.CommentRequest
 import com.rezolve.gistscanner.model.GistComment
 import org.junit.Assert.*

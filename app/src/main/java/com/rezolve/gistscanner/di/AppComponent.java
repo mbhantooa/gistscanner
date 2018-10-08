@@ -3,6 +3,7 @@ package com.rezolve.gistscanner.di;
 import android.app.Application;
 
 import com.rezolve.gistscanner.MyApplication;
+import com.rezolve.gistscanner.data.GistRepositoryModule;
 import com.rezolve.gistscanner.ui.main.ViewModelModule;
 
 import javax.inject.Singleton;
@@ -17,6 +18,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
         ApplicationModule.class,
         ActivityBindingModule.class,
         AndroidSupportInjectionModule.class,
+        GistRepositoryModule.class,
         ViewModelModule.class
 })
 public interface AppComponent extends AndroidInjector<MyApplication> {

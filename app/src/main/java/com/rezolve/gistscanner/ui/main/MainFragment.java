@@ -45,6 +45,8 @@ public class MainFragment extends DaggerFragment {
         mainViewModel = ViewModelProviders
                 .of(this, viewModelFactory)
                 .get(MainViewModel.class);
+
+        mainViewModel.micCheck();
     }
 
 }
