@@ -1,4 +1,4 @@
-package com.rezolve.gistscanner.api;
+package com.rezolve.gistscanner.data;
 
 import android.support.annotation.NonNull;
 
@@ -15,7 +15,7 @@ import com.rezolve.gistscanner.model.GistCommentListResponse;
  * is done through the response type itself as it wraps both a potential response and also the
  * possible exception.
  */
-public interface IGistApi {
+public interface IGistDataSource {
 
     void setCallback(Callback callback);
 

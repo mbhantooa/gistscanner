@@ -1,4 +1,4 @@
-package com.rezolve.gistscanner.api;
+package com.rezolve.gistscanner.data;
 
 import android.support.annotation.NonNull;
 

@@ -18,7 +18,10 @@ import dagger.android.support.DaggerFragment;
 @ActivityScoped
 public class MainFragment extends DaggerFragment {
 
-    private MainViewModel mViewModel;
+    @Inject
+    ViewModelFactory viewModelFactory;
+
+    private MainViewModel mainViewModel;
 
     @Inject
     public MainFragment() {
@@ -38,8 +41,10 @@ public class MainFragment extends DaggerFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        // TODO: Use the ViewModel
+
+        mainViewModel = ViewModelProviders
+                .of(this, viewModelFactory)
+                .get(MainViewModel.class);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.rezolve.gistscanner.api
 
+import com.rezolve.gistscanner.data.GistApiResponse
 import org.junit.Assert.*
 import org.junit.Test
 import java.io.IOException

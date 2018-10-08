@@ -2,7 +2,7 @@ package com.rezolve.gistscanner.model;
 
 import android.support.annotation.Nullable;
 
-import com.rezolve.gistscanner.api.GistApiResponse;
+import com.rezolve.gistscanner.data.GistApiResponse;
 
 import java.util.List;
 
