@@ -1,11 +1,13 @@
 package com.rezolve.gistscanner.model;
 
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GistComment {
+public class GistComment extends BaseObservable {
 
     @SerializedName("url")
     @Expose
@@ -13,6 +15,7 @@ public class GistComment {
 
     @SerializedName("id")
     @Expose
+    @Bindable
     private Integer id;
 
     @SerializedName("node_id")
@@ -21,6 +24,7 @@ public class GistComment {
 
     @SerializedName("user")
     @Expose
+    @Bindable
     private User user;
 
     @SerializedName("author_association")
@@ -33,42 +37,28 @@ public class GistComment {
 
     @SerializedName("updated_at")
     @Expose
+    @Bindable
     private String updatedAt;
 
     @SerializedName("body")
     @Expose
+    @Bindable
     private String body;
-
-    public String getUrl() {
-        return url;
-    }
 
     public Integer getId() {
         return id;
-    }
-
-    public String getNodeId() {
-        return nodeId;
     }
 
     public User getUser() {
         return user;
     }
 
-    public String getAuthorAssociation() {
-        return authorAssociation;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
+    public String getBody() {
+        return body;
     }
 
     public String getUpdatedAt() {
         return updatedAt;
-    }
-
-    public String getBody() {
-        return body;
     }
 
     @NonNull

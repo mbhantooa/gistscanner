@@ -4,9 +4,13 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.rezolve.gistscanner.R;
 import com.rezolve.gistscanner.di.ActivityScoped;
@@ -27,8 +31,6 @@ public class MainFragment extends DaggerFragment {
     @Inject
     ViewModelFactory viewModelFactory;
 
-    private MainViewModel mainViewModel;
-
     @Inject
     public MainFragment() {
     }
@@ -48,14 +50,44 @@ public class MainFragment extends DaggerFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mainViewModel = ViewModelProviders
+        if (getView() == null) {
+            return;
+        }
+
+        // UI set up
+        ProgressBar progressBar = ProgressBar.class
+                .cast(getView().findViewById(R.id.progress_circular));
+
+        RecyclerView recyclerView = RecyclerView.class
+                .cast(getView().findViewById(R.id.recycler_view_gist_comments));
+
+        recyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                layoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+        GistCommentAdapter gistCommentAdapter = new GistCommentAdapter();
+        recyclerView.setAdapter(gistCommentAdapter);
+
+
+        // View Model
+        MainViewModel mainViewModel = ViewModelProviders
                 .of(this, viewModelFactory)
                 .get(MainViewModel.class);
 
         mainViewModel.getCommentListResponse(GIST_ID, USERNAME, PASSWORD)
                 .observe(this, (gistCommentListResponse -> {
-                    if (gistCommentListResponse != null)
+                    progressBar.setVisibility(View.GONE);
+                    if (gistCommentListResponse != null) {
                         Timber.d("Found comments: " + gistCommentListResponse.toString());
+                        if (gistCommentListResponse.isSuccessful()) {
+                            gistCommentAdapter.setGistCommentList(gistCommentListResponse.getResponse());
+                        }
+                    }
                 }));
     }
 
