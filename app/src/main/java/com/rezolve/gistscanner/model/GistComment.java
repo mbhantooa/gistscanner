@@ -1,5 +1,7 @@
 package com.rezolve.gistscanner.model;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -69,6 +71,7 @@ public class GistComment {
         return body;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "GistComment{" +

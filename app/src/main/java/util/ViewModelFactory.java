@@ -1,4 +1,4 @@
-package com.rezolve.gistscanner.ui.main;
+package util;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
@@ -24,6 +24,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             throw new IllegalArgumentException("model class " + modelClass + " not found");
         }
 
+        //noinspection unchecked
         return (T) viewModelProvider.get();
     }
 }

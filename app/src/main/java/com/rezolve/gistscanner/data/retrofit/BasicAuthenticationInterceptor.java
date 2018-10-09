@@ -9,7 +9,7 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class BasicAuthenticationInterceptor implements Interceptor {
+class BasicAuthenticationInterceptor implements Interceptor {
 
     private final String credentials;
 

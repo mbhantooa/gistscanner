@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProvider;
 import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
+import util.ViewModelFactory;
 
 @Module
 public abstract class ViewModelModule {
@@ -17,6 +18,4 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MainViewModel.class)
     abstract ViewModel mainViewModel(MainViewModel mainViewModel);
-
-    //Others ViewModels
 }

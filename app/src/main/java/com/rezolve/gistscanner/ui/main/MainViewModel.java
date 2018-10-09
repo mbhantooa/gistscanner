@@ -13,10 +13,10 @@ import javax.inject.Inject;
 
 import timber.log.Timber;
 
-public class MainViewModel extends ViewModel {
+class MainViewModel extends ViewModel {
 
     @Remote
-    private GistRepository gistRepository;
+    private final GistRepository gistRepository;
 
     private final MutableLiveData<GistCommentListResponse> commentListResponseMutableLiveData
             = new MutableLiveData<>();
@@ -31,7 +31,9 @@ public class MainViewModel extends ViewModel {
                                                                     @NonNull String password) {
         if (commentListResponseMutableLiveData.getValue() == null) {
             Timber.d("Remote fetch for comment list");
-            gistRepository.fetchGistCommentList(gistID, username, password, (commentListResponseMutableLiveData::setValue));
+            gistRepository.fetchGistCommentList(
+                    gistID, username,
+                    password, (commentListResponseMutableLiveData::setValue));
         }
         return commentListResponseMutableLiveData;
     }

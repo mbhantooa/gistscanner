@@ -15,9 +15,14 @@ import javax.inject.Inject;
 
 import dagger.android.support.DaggerFragment;
 import timber.log.Timber;
+import util.ViewModelFactory;
 
 @ActivityScoped
 public class MainFragment extends DaggerFragment {
+
+    private static final String GIST_ID = "92c0e856c23d0c8c6c26611028a32089";
+    private static final String USERNAME = "mbhantooa";
+    private static final String PASSWORD = "P@ranoid2018";
 
     @Inject
     ViewModelFactory viewModelFactory;
@@ -47,7 +52,7 @@ public class MainFragment extends DaggerFragment {
                 .of(this, viewModelFactory)
                 .get(MainViewModel.class);
 
-        mainViewModel.getCommentListResponse("92c0e856c23d0c8c6c26611028a32089", "mbhantooa", "P@ranoid2018")
+        mainViewModel.getCommentListResponse(GIST_ID, USERNAME, PASSWORD)
                 .observe(this, (gistCommentListResponse -> {
                     if (gistCommentListResponse != null)
                         Timber.d("Found comments: " + gistCommentListResponse.toString());
