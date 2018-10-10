@@ -1,18 +1,19 @@
 package com.rezolve.gistscanner.ui.main;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.rezolve.gistscanner.R;
+import com.rezolve.gistscanner.databinding.MainFragmentBinding;
 import com.rezolve.gistscanner.di.ActivityScoped;
 
 import javax.inject.Inject;
@@ -27,6 +28,8 @@ public class MainFragment extends DaggerFragment {
     private static final String GIST_ID = "92c0e856c23d0c8c6c26611028a32089";
     private static final String USERNAME = "mbhantooa";
     private static final String PASSWORD = "P@ranoid2018";
+
+    private MainFragmentBinding mainFragmentBinding;
 
     @Inject
     ViewModelFactory viewModelFactory;
@@ -43,7 +46,9 @@ public class MainFragment extends DaggerFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.main_fragment, container, false);
+        mainFragmentBinding = DataBindingUtil.inflate(
+                inflater, R.layout.main_fragment, container, false);
+        return mainFragmentBinding.getRoot();
     }
 
     @Override
@@ -58,20 +63,9 @@ public class MainFragment extends DaggerFragment {
         ProgressBar progressBar = ProgressBar.class
                 .cast(getView().findViewById(R.id.progress_circular));
 
-        RecyclerView recyclerView = RecyclerView.class
-                .cast(getView().findViewById(R.id.recycler_view_gist_comments));
-
-        recyclerView.setHasFixedSize(true);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                layoutManager.getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
-
-        GistCommentAdapter gistCommentAdapter = new GistCommentAdapter();
-        recyclerView.setAdapter(gistCommentAdapter);
+        mainFragmentBinding.setAdapter(new GistCommentAdapter());
+        mainFragmentBinding.setDividerItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        mainFragmentBinding.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
         // View Model
@@ -85,7 +79,7 @@ public class MainFragment extends DaggerFragment {
                     if (gistCommentListResponse != null) {
                         Timber.d("Found comments: " + gistCommentListResponse.toString());
                         if (gistCommentListResponse.isSuccessful()) {
-                            gistCommentAdapter.setGistCommentList(gistCommentListResponse.getResponse());
+                            mainFragmentBinding.getAdapter().setGistCommentList(gistCommentListResponse.getResponse());
                         }
                     }
                 }));
