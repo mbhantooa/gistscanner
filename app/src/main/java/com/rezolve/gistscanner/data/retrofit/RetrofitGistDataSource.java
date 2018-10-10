@@ -42,6 +42,8 @@ public class RetrofitGistDataSource implements IGistDataSource {
                                     response.body(),
                                     null
                             ));
+
+                        // TODO: 10/10/2018 handle failure
                     }
 
                     @Override
@@ -68,6 +70,8 @@ public class RetrofitGistDataSource implements IGistDataSource {
                     public void onResponse(@NonNull Call<GistComment> call, @NonNull Response<GistComment> response) {
                         if (null != callback)
                             callback.onComplete(new CreateGistResponse(response.body(), null));
+
+                        // TODO: 10/10/2018 handle failure
                     }
 
                     @Override

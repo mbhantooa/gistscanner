@@ -72,7 +72,7 @@ public class MainFragment extends DaggerFragment {
                 .observe(this, (gistCommentListResponse -> {
                     mainFragmentBinding.progressCircular.setVisibility(View.GONE);
                     if (gistCommentListResponse != null) {
-                        Timber.d("Found comments: " + gistCommentListResponse.toString());
+                        Timber.d(gistCommentListResponse.toString());
                         if (gistCommentListResponse.isSuccessful()) {
                             mainFragmentBinding.getAdapter().setGistCommentList(gistCommentListResponse.getResponse());
                         }
