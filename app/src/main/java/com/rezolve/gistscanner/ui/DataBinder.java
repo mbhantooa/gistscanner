@@ -1,8 +1,10 @@
-package com.rezolve.gistscanner.ui.main;
+package com.rezolve.gistscanner.ui;
 
 import android.databinding.BindingAdapter;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
+
+import com.rezolve.gistscanner.ui.main.GistCommentAdapter;
 
 public class DataBinder {
 

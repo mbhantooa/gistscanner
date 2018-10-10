@@ -1,7 +1,7 @@
 package com.rezolve.gistscanner.di;
 
 import com.rezolve.gistscanner.ui.main.MainActivity;
-import com.rezolve.gistscanner.ui.main.MainModule;
+import com.rezolve.gistscanner.ui.MainModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
