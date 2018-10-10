@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import com.rezolve.gistscanner.R;
 import com.rezolve.gistscanner.databinding.MainFragmentBinding;
@@ -55,13 +54,9 @@ public class MainFragment extends DaggerFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (getView() == null) {
+        if (getView() == null || getContext() == null) {
             return;
         }
-
-        // UI set up
-        ProgressBar progressBar = ProgressBar.class
-                .cast(getView().findViewById(R.id.progress_circular));
 
         mainFragmentBinding.setAdapter(new GistCommentAdapter());
         mainFragmentBinding.setDividerItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
@@ -75,7 +70,7 @@ public class MainFragment extends DaggerFragment {
 
         mainViewModel.getCommentListResponse(GIST_ID, USERNAME, PASSWORD)
                 .observe(this, (gistCommentListResponse -> {
-                    progressBar.setVisibility(View.GONE);
+                    mainFragmentBinding.progressCircular.setVisibility(View.GONE);
                     if (gistCommentListResponse != null) {
                         Timber.d("Found comments: " + gistCommentListResponse.toString());
                         if (gistCommentListResponse.isSuccessful()) {
