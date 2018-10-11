@@ -13,16 +13,8 @@ public class User extends BaseObservable {
     @Bindable
     private String login;
 
-    @SerializedName("id")
-    @Expose
-    private Integer id;
-
     public String getLogin() {
         return login;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     @NonNull
@@ -30,7 +22,6 @@ public class User extends BaseObservable {
     public String toString() {
         return "User{" +
                 "login='" + login + '\'' +
-                ", id=" + id +
                 '}';
     }
 }

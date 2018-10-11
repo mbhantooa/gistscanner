@@ -9,19 +9,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class GistComment extends BaseObservable {
 
-    @SerializedName("id")
-    @Expose
-    @Bindable
-    private Integer id;
-
     @SerializedName("user")
     @Expose
     @Bindable
     private User user;
-
-    @SerializedName("created_at")
-    @Expose
-    private String createdAt;
 
     @SerializedName("updated_at")
     @Expose
@@ -32,10 +23,6 @@ public class GistComment extends BaseObservable {
     @Expose
     @Bindable
     private String body;
-
-    public Integer getId() {
-        return id;
-    }
 
     public User getUser() {
         return user;
@@ -53,9 +40,7 @@ public class GistComment extends BaseObservable {
     @Override
     public String toString() {
         return "GistComment{" +
-                ", id=" + id +
                 ", user=" + user +
-                ", createdAt='" + createdAt + '\'' +
                 ", updatedAt='" + updatedAt + '\'' +
                 ", body='" + body + '\'' +
                 '}';
