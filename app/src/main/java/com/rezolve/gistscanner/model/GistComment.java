@@ -1,27 +1,22 @@
 package com.rezolve.gistscanner.model;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GistComment extends BaseObservable {
+public class GistComment {
 
     @SerializedName("user")
     @Expose
-    @Bindable
     private User user;
 
     @SerializedName("updated_at")
     @Expose
-    @Bindable
     private String updatedAt;
 
     @SerializedName("body")
     @Expose
-    @Bindable
     private String body;
 
     public User getUser() {

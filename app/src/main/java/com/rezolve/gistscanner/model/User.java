@@ -1,16 +1,13 @@
 package com.rezolve.gistscanner.model;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class User extends BaseObservable {
+public class User {
     @SerializedName("login")
     @Expose
-    @Bindable
     private String login;
 
     public String getLogin() {

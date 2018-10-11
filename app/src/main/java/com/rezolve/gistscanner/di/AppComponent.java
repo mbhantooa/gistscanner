@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.rezolve.gistscanner.MyApplication;
 import com.rezolve.gistscanner.data.GistRepositoryModule;
-import com.rezolve.gistscanner.ui.main.ViewModelModule;
+import com.rezolve.gistscanner.viewmodel.ViewModelModule;
 
 import javax.inject.Singleton;
 

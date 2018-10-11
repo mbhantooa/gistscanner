@@ -1,4 +1,4 @@
-package com.rezolve.gistscanner.ui.main;
+package com.rezolve.gistscanner.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProvider;
 import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
+
 import com.rezolve.gistscanner.ui.util.ViewModelFactory;
 
 @SuppressWarnings("unused")

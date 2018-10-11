@@ -1,4 +1,4 @@
-package com.rezolve.gistscanner.ui.main;
+package com.rezolve.gistscanner.viewmodel;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -13,7 +13,7 @@ import javax.inject.Inject;
 
 import timber.log.Timber;
 
-class MainViewModel extends ViewModel {
+public class MainViewModel extends ViewModel {
 
     @Remote
     private final GistRepository gistRepository;

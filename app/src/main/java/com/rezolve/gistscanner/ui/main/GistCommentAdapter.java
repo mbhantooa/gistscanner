@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.rezolve.gistscanner.R;
 import com.rezolve.gistscanner.databinding.GistCommentListItemBinding;
 import com.rezolve.gistscanner.model.GistComment;
+import com.rezolve.gistscanner.viewmodel.GistCommentDataBindingViewModel;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class GistCommentAdapter extends RecyclerView.Adapter<GistCommentAdapter.
     public void onBindViewHolder(@NonNull GistCommentViewHolder gistCommentViewHolder, int position) {
         gistCommentViewHolder
                 .gistCommentListItemBinding
-                .setGistComment(gistCommentList.get(position));
+                .setComment(new GistCommentDataBindingViewModel(gistCommentList.get(position)));
     }
 
     @Override
