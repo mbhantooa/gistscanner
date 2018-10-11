@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">GistScanner</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="unable_to_set_detector">There was an issue with detection.</string>
     <string name="camera_permission_required">The camera permission is required to proceed further.</string>
     <string name="scan_qr_code">Scan QR Code</string>
