@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 import timber.log.Timber;
-import util.ActivityUtils;
+import util.UIUtils;
 
 public class MainActivity extends DaggerAppCompatActivity implements
         ScannerFragment.OnFragmentInteractionListener {
@@ -50,7 +50,7 @@ public class MainActivity extends DaggerAppCompatActivity implements
     }
 
     private void addFragment() {
-        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+        UIUtils.addFragmentToActivity(getSupportFragmentManager(),
                 scannerFragment, R.id.container);
     }
 
