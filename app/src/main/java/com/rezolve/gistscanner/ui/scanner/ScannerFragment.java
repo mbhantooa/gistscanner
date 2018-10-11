@@ -1,33 +1,24 @@
 package com.rezolve.gistscanner.ui.scanner;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.google.android.gms.vision.CameraSource;
-import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
-import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.rezolve.gistscanner.R;
 import com.rezolve.gistscanner.di.ActivityScoped;
 
-import java.io.IOException;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import dagger.android.support.DaggerFragment;
+import info.androidhive.barcode.BarcodeReader;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,7 +27,7 @@ import dagger.android.support.DaggerFragment;
  * to handle interaction events.
  */
 @ActivityScoped
-public class ScannerFragment extends DaggerFragment {
+public class ScannerFragment extends DaggerFragment implements BarcodeReader.BarcodeReaderListener {
     private OnFragmentInteractionListener listener;
 
     @Inject
@@ -48,71 +39,14 @@ public class ScannerFragment extends DaggerFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_scanner, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_scanner, container, false);
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+        BarcodeReader barcodeReader = (BarcodeReader) getChildFragmentManager()
+                .findFragmentById(R.id.barcode_scanner);
+        if (barcodeReader != null)
+            barcodeReader.setListener(this);
 
-        if (getView() == null)
-            return;
-
-        SurfaceView cameraView = getView().findViewById(R.id.cameraView);
-        cameraView.setZOrderMediaOverlay(true);
-        BarcodeDetector barcode = new BarcodeDetector.Builder(getContext())
-                .setBarcodeFormats(Barcode.QR_CODE)
-                .build();
-
-        if (!barcode.isOperational()) {
-            Toast.makeText(getContext(), R.string.unable_to_set_detector, Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        CameraSource cameraSource = new CameraSource.Builder(getContext(), barcode)
-                .setFacing(CameraSource.CAMERA_FACING_BACK)
-                .setRequestedFps(24)
-                .setAutoFocusEnabled(true)
-                .setRequestedPreviewSize(1920, 1024)
-                .build();
-        cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
-            @Override
-            public void surfaceCreated(SurfaceHolder holder) {
-                try {
-                    if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA)
-                            == PackageManager.PERMISSION_GRANTED) {
-                        cameraSource.start(cameraView.getHolder());
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-            }
-
-            @Override
-            public void surfaceDestroyed(SurfaceHolder holder) {
-            }
-        });
-
-        barcode.setProcessor(new Detector.Processor<Barcode>() {
-            @Override
-            public void release() {
-            }
-
-            @Override
-            public void receiveDetections(Detector.Detections<Barcode> detections) {
-                final SparseArray<Barcode> barcodeSparseArray = detections.getDetectedItems();
-                if (barcodeSparseArray.size() > 0) {
-                    final Barcode barcode = barcodeSparseArray.valueAt(0);
-                    if (listener != null) {
-                        listener.onBarcodeDetected(barcode);
-                    }
-                }
-            }
-        });
+        return view;
     }
 
     @Override
@@ -133,6 +67,39 @@ public class ScannerFragment extends DaggerFragment {
         listener = null;
     }
 
+    //region BarcodeReader.BarcodeReaderListener Methods
+
+    @Override
+    public void onScanned(Barcode barcode) {
+        if (listener != null)
+            listener.onBarcodeDetected(barcode);
+
+    }
+
+    @Override
+    public void onScannedMultiple(List<Barcode> barcodes) {
+
+    }
+
+    @Override
+    public void onBitmapScanned(SparseArray<Barcode> sparseArray) {
+
+    }
+
+    @Override
+    public void onScanError(String errorMessage) {
+        if (listener != null)
+            listener.onScanError(errorMessage);
+    }
+
+    @Override
+    public void onCameraPermissionDenied() {
+        if (listener != null)
+            listener.onScanError(getString(R.string.camera_permission_denied));
+    }
+
+    //endregion
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -145,5 +112,7 @@ public class ScannerFragment extends DaggerFragment {
      */
     public interface OnFragmentInteractionListener {
         void onBarcodeDetected(Barcode barcode);
+
+        void onScanError(String error);
     }
 }

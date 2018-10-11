@@ -54,6 +54,17 @@ public class MainActivity extends DaggerAppCompatActivity implements
                 scannerFragment, R.id.container);
     }
 
+    private void showCommentListFragment(Barcode barcode) {
+        runOnUiThread(() -> {
+            String gistId = barcode.displayValue;
+            mainFragment.getArguments().putString(MainFragment.GIST_ID_BUNDLE_ARGUMENT,
+                    gistId);
+
+            UIUtils.animateFragment(getSupportFragmentManager(),
+                    mainFragment, R.id.container, "main");
+        });
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -69,6 +80,12 @@ public class MainActivity extends DaggerAppCompatActivity implements
 
     @Override
     public void onBarcodeDetected(Barcode barcode) {
-        Timber.d("Found barcode: " + barcode.displayValue);
+        Timber.d("Found barcode: %s", barcode.displayValue);
+        showCommentListFragment(barcode);
+    }
+
+    @Override
+    public void onScanError(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 }

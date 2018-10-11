@@ -24,7 +24,8 @@ import util.ViewModelFactory;
 @ActivityScoped
 public class MainFragment extends DaggerFragment {
 
-    private static final String GIST_ID = "92c0e856c23d0c8c6c26611028a32089";
+    public static final String GIST_ID_BUNDLE_ARGUMENT = "gist_argument";
+
     private static final String USERNAME = "mbhantooa";
     private static final String PASSWORD = "P@ranoid2018";
 
@@ -35,6 +36,7 @@ public class MainFragment extends DaggerFragment {
 
     @Inject
     public MainFragment() {
+        setArguments(new Bundle());
     }
 
     public static MainFragment newInstance() {
@@ -54,9 +56,15 @@ public class MainFragment extends DaggerFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (getView() == null || getContext() == null) {
+        if (getView() == null || getContext() == null
+                || getArguments() == null) {
             return;
         }
+
+        String gistID = getArguments().getString(GIST_ID_BUNDLE_ARGUMENT);
+
+        if (gistID == null)
+            return;
 
         mainFragmentBinding.setAdapter(new GistCommentAdapter());
         mainFragmentBinding.setDividerItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
@@ -68,7 +76,7 @@ public class MainFragment extends DaggerFragment {
                 .of(this, viewModelFactory)
                 .get(MainViewModel.class);
 
-        mainViewModel.getCommentListResponse(GIST_ID, USERNAME, PASSWORD)
+        mainViewModel.getCommentListResponse(gistID, USERNAME, PASSWORD)
                 .observe(this, (gistCommentListResponse -> {
                     mainFragmentBinding.progressCircular.setVisibility(View.GONE);
                     if (gistCommentListResponse != null) {

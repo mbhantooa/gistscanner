@@ -43,6 +43,17 @@ public class UIUtils {
         transaction.commit();
     }
 
+    public static void animateFragment(@NonNull FragmentManager fragmentManager,
+                                       @NonNull Fragment in, int frameId,
+                                       @NonNull String tag) {
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.setCustomAnimations(android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right);
+        ft.replace(frameId, in, tag);
+        ft.addToBackStack(tag);
+        ft.commit();
+    }
+
     public static void transparentToolbar(Activity activity) {
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
             setWindowFlag(activity, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
@@ -66,5 +77,4 @@ public class UIUtils {
         }
         win.setAttributes(winParams);
     }
-
 }
