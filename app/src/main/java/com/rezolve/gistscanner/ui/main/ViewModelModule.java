@@ -8,6 +8,7 @@ import dagger.Module;
 import dagger.multibindings.IntoMap;
 import util.ViewModelFactory;
 
+@SuppressWarnings("unused")
 @Module
 public abstract class ViewModelModule {
 

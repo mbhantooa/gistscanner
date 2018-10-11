@@ -39,10 +39,6 @@ public class MainFragment extends DaggerFragment {
         setArguments(new Bundle());
     }
 
-    public static MainFragment newInstance() {
-        return new MainFragment();
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

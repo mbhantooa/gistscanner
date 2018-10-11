@@ -7,6 +7,7 @@ import com.rezolve.gistscanner.ui.scanner.ScannerFragment;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
+@SuppressWarnings("unused")
 @Module
 public abstract class MainModule {
 

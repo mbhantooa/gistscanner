@@ -111,7 +111,7 @@ public class ScannerFragment extends DaggerFragment implements BarcodeReader.Bar
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        void onBarcodeDetected(Barcode barcode);
+        void onBarcodeDetected(@NonNull Barcode barcode);
 
         void onScanError(String error);
     }

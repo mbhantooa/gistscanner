@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.google.android.gms.vision.barcode.Barcode;
@@ -54,14 +55,16 @@ public class MainActivity extends DaggerAppCompatActivity implements
                 scannerFragment, R.id.container);
     }
 
-    private void showCommentListFragment(Barcode barcode) {
+    private void showCommentListFragment(@NonNull Barcode barcode) {
         runOnUiThread(() -> {
             String gistId = barcode.displayValue;
-            mainFragment.getArguments().putString(MainFragment.GIST_ID_BUNDLE_ARGUMENT,
-                    gistId);
+            if (!TextUtils.isEmpty(barcode.displayValue) && mainFragment.getArguments() != null) {
+                mainFragment.getArguments().putString(MainFragment.GIST_ID_BUNDLE_ARGUMENT,
+                        gistId);
 
-            UIUtils.animateFragment(getSupportFragmentManager(),
-                    mainFragment, R.id.container, "main");
+                UIUtils.animateFragment(getSupportFragmentManager(),
+                        mainFragment, R.id.container, "main");
+            }
         });
     }
 
@@ -79,7 +82,7 @@ public class MainActivity extends DaggerAppCompatActivity implements
     }
 
     @Override
-    public void onBarcodeDetected(Barcode barcode) {
+    public void onBarcodeDetected(@NonNull Barcode barcode) {
         Timber.d("Found barcode: %s", barcode.displayValue);
         showCommentListFragment(barcode);
     }
