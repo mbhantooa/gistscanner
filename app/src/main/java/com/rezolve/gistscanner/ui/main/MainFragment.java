@@ -64,7 +64,8 @@ public class MainFragment extends DaggerFragment {
             return;
 
         mainFragmentBinding.setAdapter(new GistCommentAdapter());
-        mainFragmentBinding.setDividerItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        mainFragmentBinding.setDividerItemDecoration(
+                new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         mainFragmentBinding.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
@@ -79,7 +80,9 @@ public class MainFragment extends DaggerFragment {
                     if (gistCommentListResponse != null) {
                         Timber.d(gistCommentListResponse.toString());
                         if (gistCommentListResponse.isSuccessful()) {
-                            mainFragmentBinding.getAdapter().setGistCommentList(gistCommentListResponse.getResponse());
+                            mainFragmentBinding
+                                    .getAdapter()
+                                    .setGistCommentList(gistCommentListResponse.getResponse());
                         }
                     }
                 }));
