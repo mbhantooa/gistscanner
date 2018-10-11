@@ -2,6 +2,7 @@ package util;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
+import android.support.annotation.NonNull;
 
 import java.util.Map;
 
@@ -16,6 +17,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         this.viewModels = viewModels;
     }
 
+    @NonNull
     @Override
     public <T extends ViewModel> T create(Class<T> modelClass) {
         Provider<ViewModel> viewModelProvider = viewModels.get(modelClass);
