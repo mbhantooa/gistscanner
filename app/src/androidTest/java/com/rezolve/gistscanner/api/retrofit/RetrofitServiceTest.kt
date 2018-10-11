@@ -38,7 +38,6 @@ class RetrofitServiceTest {
             val firstGistComment = it[0]
 
             assertNotNull(firstGistComment)
-            assertEquals(2725937, firstGistComment.id)
             assertEquals("This is a small wrapper class that uses generics to callers determine the type of the actual response and the exception cases.",
                     firstGistComment.body)
         }
@@ -65,7 +64,6 @@ class RetrofitServiceTest {
             val firstGistComment = it[0]
 
             assertNotNull(firstGistComment)
-            assertEquals(25606240, firstGistComment.user.id)
             assertEquals("mbhantooa", firstGistComment.user.login)
         }
     }

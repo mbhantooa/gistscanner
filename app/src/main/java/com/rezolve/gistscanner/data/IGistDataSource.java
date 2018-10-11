@@ -21,13 +21,13 @@ public interface IGistDataSource {
     void getGistCommentList(@NonNull String gistId,
                             @NonNull String username,
                             @NonNull String password,
-                            @Nullable Callback<GistCommentListResponse> callback);
+                            @NonNull Callback<GistCommentListResponse> callback);
 
     void createGistComment(@NonNull String gistId,
                            @NonNull String username,
                            @NonNull String password,
                            @NonNull String comment,
-                           @Nullable Callback<CreateGistResponse> callback);
+                           @NonNull Callback<CreateGistResponse> callback);
 
     @FunctionalInterface
     interface Callback<T> {
