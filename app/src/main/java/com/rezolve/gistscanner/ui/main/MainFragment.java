@@ -19,7 +19,7 @@ import javax.inject.Inject;
 
 import dagger.android.support.DaggerFragment;
 import timber.log.Timber;
-import util.ViewModelFactory;
+import com.rezolve.gistscanner.ui.util.ViewModelFactory;
 
 @ActivityScoped
 public class MainFragment extends DaggerFragment {

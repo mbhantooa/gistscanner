@@ -8,7 +8,7 @@ import android.view.View;
 import com.rezolve.gistscanner.R;
 import com.rezolve.gistscanner.ui.main.MainActivity;
 
-import util.UIUtils;
+import com.rezolve.gistscanner.ui.util.UIUtils;
 
 public class LandingActivity extends AppCompatActivity {
 

@@ -17,7 +17,8 @@ import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 import timber.log.Timber;
-import util.UIUtils;
+
+import com.rezolve.gistscanner.ui.util.UIUtils;
 
 public class MainActivity extends DaggerAppCompatActivity implements
         ScannerFragment.OnFragmentInteractionListener {
@@ -35,8 +36,15 @@ public class MainActivity extends DaggerAppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CODE);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    this,
+                    new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CODE);
         } else {
             if (savedInstanceState == null) {
                 ScannerFragment fragment = ScannerFragment.class.cast(
@@ -44,26 +52,27 @@ public class MainActivity extends DaggerAppCompatActivity implements
                 );
 
                 if (fragment == null) {
-                    addFragment();
+                    addScannerFragment();
                 }
             }
         }
     }
 
-    private void addFragment() {
+    private void addScannerFragment() {
         UIUtils.addFragmentToActivity(getSupportFragmentManager(),
-                scannerFragment, R.id.container);
+                scannerFragment, R.id.container, SCANNER_FRAGMENT_TAG);
     }
 
     private void showCommentListFragment(@NonNull Barcode barcode) {
         runOnUiThread(() -> {
+            Timber.d("Found barcode: %s", barcode.displayValue);
             String gistId = barcode.displayValue;
             if (!TextUtils.isEmpty(barcode.displayValue) && mainFragment.getArguments() != null) {
                 mainFragment.getArguments().putString(MainFragment.GIST_ID_BUNDLE_ARGUMENT,
                         gistId);
 
                 UIUtils.animateFragment(getSupportFragmentManager(),
-                        mainFragment, R.id.container, "main");
+                        mainFragment, R.id.container, MAIN_FRAGMENT_TAG);
             }
         });
     }
@@ -74,16 +83,16 @@ public class MainActivity extends DaggerAppCompatActivity implements
         if (PERMISSION_REQUEST_CODE == requestCode) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                addFragment();
+                addScannerFragment();
             } else {
-                Toast.makeText(this, R.string.camera_permission_required, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.camera_permission_required,
+                        Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     @Override
     public void onBarcodeDetected(@NonNull Barcode barcode) {
-        Timber.d("Found barcode: %s", barcode.displayValue);
         showCommentListFragment(barcode);
     }
 
@@ -91,4 +100,18 @@ public class MainActivity extends DaggerAppCompatActivity implements
     public void onScanError(String error) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        UIUtils.popFragment(getSupportFragmentManager());
+
+        if (UIUtils.isFragmentVisible(getSupportFragmentManager(), SCANNER_FRAGMENT_TAG)) {
+            finish();
+        }
+        return true;
+    }
+
+
+    private static final String MAIN_FRAGMENT_TAG = "main";
+    private static final String SCANNER_FRAGMENT_TAG = "ScannerTag";
 }

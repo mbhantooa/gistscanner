@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package util;
+package com.rezolve.gistscanner.ui.util;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -37,9 +37,10 @@ public class UIUtils {
      * performed by the {@code fragmentManager}.
      */
     public static void addFragmentToActivity(@NonNull FragmentManager fragmentManager,
-                                             @NonNull Fragment fragment, int frameId) {
+                                             @NonNull Fragment fragment, int frameId,
+                                             String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(frameId, fragment);
+        transaction.add(frameId, fragment, tag);
         transaction.commit();
     }
 
@@ -52,6 +53,28 @@ public class UIUtils {
         ft.replace(frameId, in, tag);
         ft.addToBackStack(tag);
         ft.commit();
+    }
+
+    /**
+     * Simple method to determine if a fragment is added and visible
+     *
+     * @param fragmentManager the underlying fragment manager
+     * @param tag             the fragment tag
+     * @return true when fragment is found and is visible
+     */
+    public static boolean isFragmentVisible(@NonNull FragmentManager fragmentManager,
+                                            String tag) {
+        Fragment fragment = fragmentManager.findFragmentByTag(tag);
+        return fragment != null && fragment.isVisible();
+    }
+
+    /**
+     * Pops the current fragment that is part of the back stack.
+     *
+     * @param fragmentManager the underlying fragment manager.
+     */
+    public static void popFragment(@NonNull FragmentManager fragmentManager) {
+        fragmentManager.popBackStack();
     }
 
     public static void transparentToolbar(Activity activity) {
@@ -67,7 +90,7 @@ public class UIUtils {
         }
     }
 
-    public static void setWindowFlag(Activity activity, final int bits, boolean on) {
+    private static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
         if (on) {

@@ -6,7 +6,7 @@ import android.arch.lifecycle.ViewModelProvider;
 import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
-import util.ViewModelFactory;
+import com.rezolve.gistscanner.ui.util.ViewModelFactory;
 
 @SuppressWarnings("unused")
 @Module

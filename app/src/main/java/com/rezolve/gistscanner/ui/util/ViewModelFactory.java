@@ -1,4 +1,4 @@
-package util;
+package com.rezolve.gistscanner.ui.util;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
