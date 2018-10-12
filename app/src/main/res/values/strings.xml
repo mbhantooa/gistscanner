@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GistScanner</string>
+    <string name="app_name">Scan Me</string>
     <string name="unable_to_set_detector">There was an issue with detection.</string>
     <string name="camera_permission_required">The camera permission is required to proceed further.</string>
     <string name="scan_qr_code">Scan QR Code</string>
