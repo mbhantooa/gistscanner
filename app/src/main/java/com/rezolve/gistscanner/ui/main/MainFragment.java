@@ -74,6 +74,7 @@ public class MainFragment extends DaggerFragment {
                 }
             });
         }
+        editTextComment.requestFocus();
         return mainFragmentBinding.getRoot();
     }
 

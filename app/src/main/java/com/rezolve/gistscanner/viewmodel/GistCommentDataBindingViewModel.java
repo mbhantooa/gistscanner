@@ -18,7 +18,7 @@ public class GistCommentDataBindingViewModel extends BaseObservable {
             new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
 
     private static final SimpleDateFormat dateFormatSink =
-            new SimpleDateFormat("dd MMM yyyy", Locale.US);
+            new SimpleDateFormat("dd MMM yyyy 'at' HH:mm", Locale.US);
 
     public GistCommentDataBindingViewModel(GistComment gistComment) {
         this.gistComment = gistComment;

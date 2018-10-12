@@ -33,7 +33,7 @@ public class GistCommentDataBindingViewModelTest {
 
     @Test
     public void getLastUpdatedAt() {
-        String expectedFormattedDateString = "07 Oct 2018";
+        String expectedFormattedDateString = "07 Oct 2018 at 12:31";
         assertEquals(expectedFormattedDateString,
                 gistCommentDataBindingViewModel.getLastUpdatedAt());
 
