@@ -10,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.rezolve.gistscanner.R;
 import com.rezolve.gistscanner.databinding.MainFragmentBinding;
@@ -19,6 +21,7 @@ import javax.inject.Inject;
 
 import dagger.android.support.DaggerFragment;
 import timber.log.Timber;
+
 import com.rezolve.gistscanner.ui.util.ViewModelFactory;
 import com.rezolve.gistscanner.viewmodel.MainViewModel;
 
@@ -29,6 +32,8 @@ public class MainFragment extends DaggerFragment {
 
     private static final String USERNAME = "mbhantooa";
     private static final String PASSWORD = "P@ranoid2018";
+
+    private String gistId;
 
     private MainFragmentBinding mainFragmentBinding;
 
@@ -58,9 +63,9 @@ public class MainFragment extends DaggerFragment {
             return;
         }
 
-        String gistID = getArguments().getString(GIST_ID_BUNDLE_ARGUMENT);
+        gistId = getArguments().getString(GIST_ID_BUNDLE_ARGUMENT);
 
-        if (gistID == null)
+        if (gistId == null)
             return;
 
         mainFragmentBinding.setAdapter(new GistCommentAdapter());
@@ -74,15 +79,27 @@ public class MainFragment extends DaggerFragment {
                 .of(this, viewModelFactory)
                 .get(MainViewModel.class);
 
-        mainViewModel.getCommentListResponse(gistID, USERNAME, PASSWORD)
+        ProgressBar progressCircular = getView().findViewById(R.id.progress_circular);
+
+        if (mainViewModel
+                .getCommentListResponse(gistId, USERNAME, PASSWORD)
+                .getValue() != null) {
+            progressCircular.setVisibility(View.GONE);
+        } else {
+            progressCircular.setVisibility(View.VISIBLE);
+        }
+
+        mainViewModel.getCommentListResponse(gistId, USERNAME, PASSWORD)
                 .observe(this, (gistCommentListResponse -> {
-                    mainFragmentBinding.progressCircular.setVisibility(View.GONE);
+                    progressCircular.setVisibility(View.GONE);
                     if (gistCommentListResponse != null) {
                         Timber.d(gistCommentListResponse.toString());
                         if (gistCommentListResponse.isSuccessful()) {
                             mainFragmentBinding
                                     .getAdapter()
                                     .setGistCommentList(gistCommentListResponse.getResponse());
+                        } else {
+                            Toast.makeText(getContext(), R.string.gist_id_validation, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }));
