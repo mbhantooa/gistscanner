@@ -7,4 +7,6 @@
     <string name="scan_code_logo">scan_code_logo</string>
     <string name="camera_permission_denied">Camera permission denied.</string>
     <string name="gist_id_validation">No comments returned. Please ensure you\'re pointing to a valid gist id.</string>
+    <string name="add_comment_here_hint">Add comment here</string>
+    <string name="edit_text_validation">Please add some comment before sending.</string>
 </resources>
