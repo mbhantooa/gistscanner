@@ -33,8 +33,6 @@ public class MainFragment extends DaggerFragment {
     private static final String USERNAME = "mbhantooa";
     private static final String PASSWORD = "P@ranoid2018";
 
-    private String gistId;
-
     private MainFragmentBinding mainFragmentBinding;
 
     @Inject
@@ -63,7 +61,7 @@ public class MainFragment extends DaggerFragment {
             return;
         }
 
-        gistId = getArguments().getString(GIST_ID_BUNDLE_ARGUMENT);
+        String gistId = getArguments().getString(GIST_ID_BUNDLE_ARGUMENT);
 
         if (gistId == null)
             return;
