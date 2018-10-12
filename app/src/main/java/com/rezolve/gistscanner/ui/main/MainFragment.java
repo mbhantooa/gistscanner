@@ -1,6 +1,7 @@
 package com.rezolve.gistscanner.ui.main;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
@@ -27,6 +28,7 @@ import javax.inject.Inject;
 import dagger.android.support.DaggerFragment;
 import timber.log.Timber;
 
+import com.rezolve.gistscanner.model.GistCommentListResponse;
 import com.rezolve.gistscanner.ui.util.RightDrawableOnTouchListener;
 import com.rezolve.gistscanner.ui.util.ViewModelFactory;
 import com.rezolve.gistscanner.viewmodel.MainViewModel;
@@ -133,9 +135,9 @@ public class MainFragment extends DaggerFragment {
     }
 
     private void fetchCommentList() {
-        if (mainViewModel
-                .getCommentListResponse(gistId, USERNAME, PASSWORD)
-                .getValue() != null) {
+        LiveData<GistCommentListResponse> listResponseLiveData =
+                mainViewModel.getCommentListResponse(gistId, USERNAME, PASSWORD);
+        if (listResponseLiveData.getValue() != null) {
             progressCircular.setVisibility(View.GONE);
         } else {
             progressCircular.setVisibility(View.VISIBLE);

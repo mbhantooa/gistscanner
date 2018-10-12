@@ -19,11 +19,9 @@ public class MainViewModel extends ViewModel {
     @Remote
     private final GistRepository gistRepository;
 
-    private final MutableLiveData<GistCommentListResponse> commentListResponseMutableLiveData
-            = new MutableLiveData<>();
+    private MutableLiveData<GistCommentListResponse> commentListResponseMutableLiveData;
 
-    private final MutableLiveData<CreateGistResponse> addCommentMutableLiveData
-            = new MutableLiveData<>();
+    private MutableLiveData<CreateGistResponse> addCommentMutableLiveData;
 
     @Inject
     public MainViewModel(GistRepository gistRepository) {
@@ -33,7 +31,8 @@ public class MainViewModel extends ViewModel {
     public LiveData<GistCommentListResponse> getCommentListResponse(@NonNull String gistID,
                                                                     @NonNull String username,
                                                                     @NonNull String password) {
-        if (commentListResponseMutableLiveData.getValue() == null) {
+        if (commentListResponseMutableLiveData == null) {
+            commentListResponseMutableLiveData = new MutableLiveData<>();
             Timber.d("Remote fetch for comment list");
             gistRepository.fetchGistCommentList(
                     gistID, username,
@@ -46,8 +45,8 @@ public class MainViewModel extends ViewModel {
                                                                             @NonNull String username,
                                                                             @NonNull String password,
                                                                             @NonNull String comment) {
-        if (addCommentMutableLiveData.getValue() != null)
-            addCommentMutableLiveData.setValue(null);
+        if (addCommentMutableLiveData == null)
+            addCommentMutableLiveData = new MutableLiveData<>();
 
         gistRepository.createdGistComment(gistID, username, password, comment,
                 addCommentMutableLiveData::setValue);
@@ -57,8 +56,6 @@ public class MainViewModel extends ViewModel {
     }
 
     public void invalidateCommentList() {
-        commentListResponseMutableLiveData.setValue(null);
+        commentListResponseMutableLiveData = null;
     }
-
-
 }
