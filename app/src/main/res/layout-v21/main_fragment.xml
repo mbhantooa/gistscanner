@@ -59,7 +59,8 @@
             app:dividerItemDecoration="@{dividerItemDecoration}"
             app:layoutManager="@{layoutManager}"
             app:layout_constraintBottom_toTopOf="@id/editTextComment"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/recycler_view_item" />
 
 
     </android.support.constraint.ConstraintLayout>
