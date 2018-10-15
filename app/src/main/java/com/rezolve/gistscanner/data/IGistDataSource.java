@@ -2,9 +2,6 @@ package com.rezolve.gistscanner.data;
 
 import android.support.annotation.NonNull;
 
-import com.rezolve.gistscanner.model.CreateGistResponse;
-import com.rezolve.gistscanner.model.GistCommentListResponse;
-
 /**
  * Represents the contract that is needed for the different service calls for our purpose.
  * <p>

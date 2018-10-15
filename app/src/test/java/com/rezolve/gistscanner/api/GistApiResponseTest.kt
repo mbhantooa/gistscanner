@@ -16,7 +16,7 @@ class GistApiResponseTest {
         val stringExceptionGistApiResponse = GistApiResponse(response, exception)
         assertNotNull(stringExceptionGistApiResponse)
 
-        assertTrue(stringExceptionGistApiResponse.isSuccessful)
+        assertTrue(stringExceptionGistApiResponse.isSuccessful())
     }
 
     @Test
@@ -27,7 +27,7 @@ class GistApiResponseTest {
         val stringExceptionGistApiResponse = GistApiResponse(response, exception)
         assertNotNull(stringExceptionGistApiResponse)
 
-        assertFalse(stringExceptionGistApiResponse.isSuccessful)
+        assertFalse(stringExceptionGistApiResponse.isSuccessful())
     }
 
     @Test(expected = IllegalArgumentException::class)

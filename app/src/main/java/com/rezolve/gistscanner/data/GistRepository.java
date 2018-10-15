@@ -1,8 +1,5 @@
 package com.rezolve.gistscanner.data;
 
-import com.rezolve.gistscanner.model.CreateGistResponse;
-import com.rezolve.gistscanner.model.GistCommentListResponse;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 

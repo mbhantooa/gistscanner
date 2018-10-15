@@ -15,9 +15,9 @@ import java.util.List;
 
 public class GistCommentAdapter extends RecyclerView.Adapter<GistCommentAdapter.GistCommentViewHolder> {
 
-    private List<GistComment> gistCommentList;
+    private List<? extends GistComment> gistCommentList;
 
-    public void setGistCommentList(List<GistComment> gistCommentList) {
+    public void setGistCommentList(List<? extends GistComment> gistCommentList) {
         this.gistCommentList = gistCommentList;
         if (gistCommentList != null) {
             notifyDataSetChanged();

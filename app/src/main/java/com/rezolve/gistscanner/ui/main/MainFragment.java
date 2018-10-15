@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.rezolve.gistscanner.R;
+import com.rezolve.gistscanner.data.GistCommentListResponse;
 import com.rezolve.gistscanner.databinding.MainFragmentBinding;
 import com.rezolve.gistscanner.di.ActivityScoped;
 
@@ -28,7 +29,6 @@ import javax.inject.Inject;
 import dagger.android.support.DaggerFragment;
 import timber.log.Timber;
 
-import com.rezolve.gistscanner.model.GistCommentListResponse;
 import com.rezolve.gistscanner.ui.util.RightDrawableOnTouchListener;
 import com.rezolve.gistscanner.ui.util.ViewModelFactory;
 import com.rezolve.gistscanner.viewmodel.MainViewModel;
