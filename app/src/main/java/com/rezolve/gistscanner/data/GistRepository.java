@@ -15,13 +15,13 @@ public class GistRepository {
     }
 
     public void fetchGistCommentList(String gistID, String username, String password,
-                                     IGistDataSource.Callback<GistCommentListResponse> callback) {
+                                     Callback<GistCommentListResponse> callback) {
         gistApi.getGistCommentList(gistID, username, password, callback);
     }
 
     public void createdGistComment(String gistID, String username,
                                    String password, String comment,
-                                   IGistDataSource.Callback<CreateGistResponse> callback) {
+                                   Callback<CreateGistResponse> callback) {
         gistApi.createGistComment(gistID, username, password, comment, callback);
     }
 }

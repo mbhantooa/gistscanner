@@ -2,6 +2,7 @@ package com.rezolve.gistscanner.data.retrofit;
 
 import android.support.annotation.NonNull;
 
+import com.rezolve.gistscanner.data.Callback;
 import com.rezolve.gistscanner.data.CreateGistResponse;
 import com.rezolve.gistscanner.data.GistCommentListResponse;
 import com.rezolve.gistscanner.data.IGistDataSource;
