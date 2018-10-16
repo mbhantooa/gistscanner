@@ -6,6 +6,3 @@ import javax.inject.Qualifier
 @Qualifier
 @Retention(AnnotationRetention.SOURCE)
 annotation class Remote
-
-
-annotation class FragmentScoped
