@@ -5,10 +5,10 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
 
+import com.rezolve.gistscanner.Remote;
 import com.rezolve.gistscanner.data.CreateGistResponse;
 import com.rezolve.gistscanner.data.GistCommentListResponse;
 import com.rezolve.gistscanner.data.GistRepository;
-import com.rezolve.gistscanner.data.Remote;
 
 import javax.inject.Inject;
 

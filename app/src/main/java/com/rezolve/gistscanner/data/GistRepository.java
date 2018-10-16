@@ -1,5 +1,7 @@
 package com.rezolve.gistscanner.data;
 
+import com.rezolve.gistscanner.Remote;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
