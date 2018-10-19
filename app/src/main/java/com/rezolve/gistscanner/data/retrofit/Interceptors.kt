@@ -2,13 +2,10 @@ package com.rezolve.gistscanner.data.retrofit
 
 import okhttp3.Credentials
 import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
 
-/**
- * Basic authorization interceptor.
- *
- * Very simple and username and password are needed.
- */
 internal class BasicAuthenticationInterceptor(private val user: String,
                                               private val password: String) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -19,4 +16,17 @@ internal class BasicAuthenticationInterceptor(private val user: String,
                 .build()
         return chain.proceed(request)
     }
+}
+
+fun OkHttpClient.Builder.addBasicAuthInterceptor(user: String, password: String) {
+    val interceptor = BasicAuthenticationInterceptor(user, password)
+
+    if (!interceptors().contains(interceptor))
+        addInterceptor(interceptor)
+}
+
+fun OkHttpClient.Builder.addLoggingInterceptor(level: HttpLoggingInterceptor.Level) {
+    val interceptor = HttpLoggingInterceptor()
+    interceptor.level = level
+    addInterceptor(interceptor)
 }

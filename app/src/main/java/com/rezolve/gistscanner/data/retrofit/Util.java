@@ -9,8 +9,9 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.rezolve.gistscanner.data.retrofit.RetrofitServiceKt.API_BASE_URL;
+
 public class Util {
-    private static final String API_BASE_URL = "https://api.github.com";
 
     private static final OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
