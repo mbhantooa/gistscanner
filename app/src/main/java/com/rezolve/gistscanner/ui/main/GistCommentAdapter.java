@@ -2,6 +2,7 @@ package com.rezolve.gistscanner.ui.main;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -15,9 +16,10 @@ import java.util.List;
 
 public class GistCommentAdapter extends RecyclerView.Adapter<GistCommentAdapter.GistCommentViewHolder> {
 
+    @Nullable
     private List<? extends GistComment> gistCommentList;
 
-    public void setGistCommentList(List<? extends GistComment> gistCommentList) {
+    public void setGistCommentList(@Nullable List<? extends GistComment> gistCommentList) {
         this.gistCommentList = gistCommentList;
         if (gistCommentList != null) {
             notifyDataSetChanged();
@@ -48,6 +50,7 @@ public class GistCommentAdapter extends RecyclerView.Adapter<GistCommentAdapter.
     }
 
     public static class GistCommentViewHolder extends RecyclerView.ViewHolder {
+        @NonNull
         final GistCommentListItemBinding gistCommentListItemBinding;
 
         public GistCommentViewHolder(final GistCommentListItemBinding gistCommentListItemBinding) {

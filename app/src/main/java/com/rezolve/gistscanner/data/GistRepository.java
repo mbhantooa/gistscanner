@@ -1,5 +1,7 @@
 package com.rezolve.gistscanner.data;
 
+import android.support.annotation.NonNull;
+
 import com.rezolve.gistscanner.Remote;
 
 import javax.inject.Inject;
@@ -14,14 +16,14 @@ public class GistRepository {
         this.gistApi = gistApi;
     }
 
-    public void fetchGistCommentList(String gistID, String username, String password,
-                                     Callback<GistCommentListResponse> callback) {
+    public void fetchGistCommentList(@NonNull String gistID, @NonNull String username, @NonNull String password,
+                                     @NonNull Callback<GistCommentListResponse> callback) {
         gistApi.getGistCommentList(gistID, username, password, callback);
     }
 
-    public void createdGistComment(String gistID, String username,
-                                   String password, String comment,
-                                   Callback<CreateGistResponse> callback) {
+    public void createdGistComment(@NonNull String gistID, @NonNull String username,
+                                   @NonNull String password, @NonNull String comment,
+                                   @NonNull Callback<CreateGistResponse> callback) {
         gistApi.createGistComment(gistID, username, password, comment, callback);
     }
 }

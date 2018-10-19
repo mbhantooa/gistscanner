@@ -77,7 +77,7 @@ public class UIUtils {
         fragmentManager.popBackStack();
     }
 
-    public static void transparentToolbar(Activity activity) {
+    public static void transparentToolbar(@NonNull Activity activity) {
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
             setWindowFlag(activity, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
         }

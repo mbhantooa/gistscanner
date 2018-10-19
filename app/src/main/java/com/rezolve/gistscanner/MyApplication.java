@@ -1,5 +1,7 @@
 package com.rezolve.gistscanner;
 
+import android.support.annotation.NonNull;
+
 import com.rezolve.gistscanner.di.DaggerAppComponent;
 
 import dagger.android.AndroidInjector;
@@ -7,6 +9,7 @@ import dagger.android.DaggerApplication;
 import timber.log.Timber;
 
 public class MyApplication extends DaggerApplication {
+    @NonNull
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         return DaggerAppComponent.builder().application(this).build();

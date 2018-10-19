@@ -1,5 +1,6 @@
 package com.rezolve.gistscanner.data.retrofit;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.rezolve.gistscanner.BuildConfig;
@@ -21,7 +22,7 @@ public class Util {
                     .addConverterFactory(GsonConverterFactory.create());
 
 
-    public static <T> T createService(Class<T> serviceClass,
+    public static <T> T createService(@NonNull Class<T> serviceClass,
                                       @Nullable String username, @Nullable String password) {
 
         // Basic authentication

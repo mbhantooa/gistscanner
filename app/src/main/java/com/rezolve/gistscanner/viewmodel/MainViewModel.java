@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.rezolve.gistscanner.Remote;
 import com.rezolve.gistscanner.data.CreateGistResponse;
@@ -19,6 +20,7 @@ public class MainViewModel extends ViewModel {
     @Remote
     private final GistRepository gistRepository;
 
+    @Nullable
     private MutableLiveData<GistCommentListResponse> commentListResponseMutableLiveData;
 
     private MutableLiveData<CreateGistResponse> addCommentMutableLiveData;
@@ -28,6 +30,7 @@ public class MainViewModel extends ViewModel {
         this.gistRepository = gistRepository;
     }
 
+    @Nullable
     public LiveData<GistCommentListResponse> getCommentListResponse(@NonNull String gistID,
                                                                     @NonNull String username,
                                                                     @NonNull String password) {

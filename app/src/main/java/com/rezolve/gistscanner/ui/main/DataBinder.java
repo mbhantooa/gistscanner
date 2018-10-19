@@ -1,6 +1,7 @@
 package com.rezolve.gistscanner.ui.main;
 
 import android.databinding.BindingAdapter;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 
@@ -18,7 +19,7 @@ public class DataBinder {
     }
 
     @BindingAdapter("dividerItemDecoration")
-    public static void setDividerItemDecoration(RecyclerView recyclerView, DividerItemDecoration dividerItemDecoration) {
+    public static void setDividerItemDecoration(RecyclerView recyclerView, @NonNull DividerItemDecoration dividerItemDecoration) {
         recyclerView.addItemDecoration(dividerItemDecoration);
     }
 }

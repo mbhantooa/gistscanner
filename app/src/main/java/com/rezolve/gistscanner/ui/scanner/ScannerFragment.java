@@ -3,6 +3,7 @@ package com.rezolve.gistscanner.ui.scanner;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ import info.androidhive.barcode.BarcodeReader;
  */
 @ActivityScoped
 public class ScannerFragment extends DaggerFragment implements BarcodeReader.BarcodeReaderListener {
+    @Nullable
     private OnFragmentInteractionListener listener;
 
     @Inject
@@ -70,7 +72,7 @@ public class ScannerFragment extends DaggerFragment implements BarcodeReader.Bar
     //region BarcodeReader.BarcodeReaderListener Methods
 
     @Override
-    public void onScanned(Barcode barcode) {
+    public void onScanned(@NonNull Barcode barcode) {
         if (listener != null)
             listener.onBarcodeDetected(barcode);
 

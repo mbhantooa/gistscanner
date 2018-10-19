@@ -1,6 +1,7 @@
 package com.rezolve.gistscanner.di;
 
 import android.app.Application;
+import android.support.annotation.NonNull;
 
 import com.rezolve.gistscanner.MyApplication;
 import com.rezolve.gistscanner.data.GistRepositoryModule;
@@ -28,6 +29,7 @@ public interface AppComponent extends AndroidInjector<MyApplication> {
         @BindsInstance
         AppComponent.Builder application(Application application);
 
+        @NonNull
         AppComponent build();
     }
 }

@@ -51,6 +51,7 @@ public class MainFragment extends DaggerFragment {
 
     private MainViewModel mainViewModel;
 
+    @Nullable
     private String gistId;
 
     @Inject
@@ -71,7 +72,7 @@ public class MainFragment extends DaggerFragment {
             editTextComment.setClipToOutline(true);
             editTextComment.setOnTouchListener(new RightDrawableOnTouchListener(editTextComment) {
                 @Override
-                public boolean onDrawableTouch(MotionEvent event) {
+                public boolean onDrawableTouch(@NonNull MotionEvent event) {
                     return onTapSend(editTextComment, event);
                 }
             });
@@ -80,7 +81,7 @@ public class MainFragment extends DaggerFragment {
         return mainFragmentBinding.getRoot();
     }
 
-    private boolean onTapSend(final EditText editText, MotionEvent event) {
+    private boolean onTapSend(final EditText editText, @NonNull MotionEvent event) {
         if (TextUtils.isEmpty(editText.getText())) {
             Toast.makeText(getContext(), R.string.edit_text_validation, Toast.LENGTH_SHORT).show();
             return false;
@@ -91,7 +92,7 @@ public class MainFragment extends DaggerFragment {
         return true;
     }
 
-    private void sendComment(EditText editText, String comment) {
+    private void sendComment(EditText editText, @NonNull String comment) {
         editText.setEnabled(false);
         progressCircular.setVisibility(View.VISIBLE);
         mainViewModel.invalidateCommentList();

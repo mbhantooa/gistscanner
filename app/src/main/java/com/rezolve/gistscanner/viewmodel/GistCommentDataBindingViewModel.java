@@ -1,6 +1,7 @@
 package com.rezolve.gistscanner.viewmodel;
 
 import android.databinding.BaseObservable;
+import android.support.annotation.NonNull;
 
 import com.rezolve.gistscanner.model.GistComment;
 import com.rezolve.gistscanner.model.User;
@@ -24,6 +25,7 @@ public class GistCommentDataBindingViewModel extends BaseObservable {
         this.gistComment = gistComment;
     }
 
+    @NonNull
     public String getBody() {
         return gistComment.getBody();
     }
@@ -40,6 +42,7 @@ public class GistCommentDataBindingViewModel extends BaseObservable {
         }
     }
 
+    @NonNull
     public User getUser() {
         return gistComment.getUser();
     }

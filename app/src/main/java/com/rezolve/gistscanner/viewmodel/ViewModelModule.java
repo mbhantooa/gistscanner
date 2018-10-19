@@ -2,6 +2,7 @@ package com.rezolve.gistscanner.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
+import android.support.annotation.NonNull;
 
 import dagger.Binds;
 import dagger.Module;
@@ -13,9 +14,11 @@ import com.rezolve.gistscanner.ui.util.ViewModelFactory;
 @Module
 public abstract class ViewModelModule {
 
+    @NonNull
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(ViewModelFactory viewModelFactory);
 
+    @NonNull
     @Binds
     @IntoMap
     @ViewModelKey(MainViewModel.class)

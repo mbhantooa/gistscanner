@@ -2,6 +2,7 @@ package com.rezolve.gistscanner.ui.util;
 
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -17,7 +18,7 @@ public abstract class RightDrawableOnTouchListener implements View.OnTouchListen
     }
 
     @Override
-    public boolean onTouch(final View v, final MotionEvent event) {
+    public boolean onTouch(@NonNull final View v, @NonNull final MotionEvent event) {
         final int fuzz = 90;
         if (event.getAction() == MotionEvent.ACTION_DOWN && drawable != null) {
             final int x = (int) event.getX();

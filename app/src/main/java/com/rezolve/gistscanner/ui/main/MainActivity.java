@@ -2,6 +2,7 @@ package com.rezolve.gistscanner.ui.main;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -26,7 +27,7 @@ public class MainActivity extends DaggerAppCompatActivity implements
     ScannerFragment scannerFragment;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
