@@ -1,7 +1,7 @@
 package com.rezolve.gistscanner.api.retrofit
 
 import com.rezolve.gistscanner.data.retrofit.RetrofitService
-import com.rezolve.gistscanner.data.retrofit.Util
+import com.rezolve.gistscanner.data.retrofit.createService
 import com.rezolve.gistscanner.model.CommentRequest
 import com.rezolve.gistscanner.model.GistComment
 import org.junit.Assert.*
@@ -14,7 +14,7 @@ class RetrofitServiceTest {
 
     private val gistID = "92c0e856c23d0c8c6c26611028a32089"
 
-    private val retrofitService = Util.createService(
+    private val retrofitService = createService(
             RetrofitService::class.java, "mbhantooa", "P@ranoid2018"
     )
 
