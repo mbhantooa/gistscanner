@@ -7,9 +7,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.rezolve.gistscanner.Remote;
-import com.rezolve.gistscanner.data.CreateGistResponse;
-import com.rezolve.gistscanner.data.GistCommentListResponse;
 import com.rezolve.gistscanner.data.GistRepository;
+import com.rezolve.gistscanner.data.NetworkCallback;
+import com.rezolve.gistscanner.model.GistComment;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -21,9 +23,9 @@ public class MainViewModel extends ViewModel {
     private final GistRepository gistRepository;
 
     @Nullable
-    private MutableLiveData<GistCommentListResponse> commentListResponseMutableLiveData;
+    private MutableLiveData<List<GistComment>> commentListMutableLiveData;
 
-    private MutableLiveData<CreateGistResponse> addCommentMutableLiveData;
+    private MutableLiveData<GistComment> addCommentMutableLiveData;
 
     @Inject
     public MainViewModel(GistRepository gistRepository) {
@@ -31,34 +33,34 @@ public class MainViewModel extends ViewModel {
     }
 
     @Nullable
-    public LiveData<GistCommentListResponse> getCommentListResponse(@NonNull String gistID,
-                                                                    @NonNull String username,
-                                                                    @NonNull String password) {
-        if (commentListResponseMutableLiveData == null) {
-            commentListResponseMutableLiveData = new MutableLiveData<>();
+    public LiveData<List<GistComment>> getCommentListResponse(@NonNull String gistID,
+                                                              @NonNull String username,
+                                                              @NonNull String password) {
+        if (commentListMutableLiveData == null) {
+            commentListMutableLiveData = new MutableLiveData<>();
             Timber.d("Remote fetch for comment list");
             gistRepository.fetchGistCommentList(
                     gistID, username,
-                    password, commentListResponseMutableLiveData::setValue);
+                    password, null);
         }
-        return commentListResponseMutableLiveData;
+        return commentListMutableLiveData;
     }
 
-    public MutableLiveData<CreateGistResponse> getAddCommentMutableLiveData(@NonNull String gistID,
-                                                                            @NonNull String username,
-                                                                            @NonNull String password,
-                                                                            @NonNull String comment) {
+    public MutableLiveData<GistComment> getAddCommentMutableLiveData(@NonNull String gistID,
+                                                                     @NonNull String username,
+                                                                     @NonNull String password,
+                                                                     @NonNull String comment) {
         if (addCommentMutableLiveData == null)
             addCommentMutableLiveData = new MutableLiveData<>();
 
         gistRepository.createdGistComment(gistID, username, password, comment,
-                addCommentMutableLiveData::setValue);
+                null);
 
 
         return addCommentMutableLiveData;
     }
 
     public void invalidateCommentList() {
-        commentListResponseMutableLiveData = null;
+        commentListMutableLiveData = null;
     }
 }
