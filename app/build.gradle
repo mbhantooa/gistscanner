@@ -74,4 +74,11 @@ dependencies {
 
     // google vision library
     implementation 'com.google.android.gms:play-services-vision:16.2.0'
+
+    // anko
+    implementation "org.jetbrains.anko:anko:0.10.7"
+
+    // Android annotations
+    annotationProcessor "org.androidannotations:androidannotations:4.5.2"
+    implementation "org.androidannotations:androidannotations-api:4.5.2"
 }

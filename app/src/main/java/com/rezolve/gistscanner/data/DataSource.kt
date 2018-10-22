@@ -4,6 +4,8 @@ import com.rezolve.gistscanner.data.retrofit.RetrofitService
 import com.rezolve.gistscanner.data.retrofit.createService
 import com.rezolve.gistscanner.model.CommentRequest
 import com.rezolve.gistscanner.model.GistComment
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.debug
 import retrofit2.Call
 import retrofit2.Response
 import javax.inject.Inject
@@ -32,7 +34,7 @@ internal interface Callback<T> {
 }
 
 @Singleton
-internal class RetrofitGistDataSource @Inject constructor() : IGistDataSource {
+internal class RetrofitGistDataSource @Inject constructor() : IGistDataSource, AnkoLogger {
     override fun getGistCommentList(gistId: String,
                                     username: String,
                                     password: String, callback:
@@ -43,6 +45,7 @@ internal class RetrofitGistDataSource @Inject constructor() : IGistDataSource {
                 .enqueue(object : retrofit2.Callback<List<GistComment>> {
                     override fun onResponse(call: Call<List<GistComment>>,
                                             response: Response<List<GistComment>>) {
+                        debug("List comment response $response")
                         callback.let {
                             if (response.isSuccessful) it.onComplete(GistCommentListResponse(
                                     response.body()))
