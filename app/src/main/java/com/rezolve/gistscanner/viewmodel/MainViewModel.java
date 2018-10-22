@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 
 import com.rezolve.gistscanner.Remote;
 import com.rezolve.gistscanner.data.GistRepository;
-import com.rezolve.gistscanner.data.NetworkCallback;
 import com.rezolve.gistscanner.model.GistComment;
 
 import java.util.List;
@@ -42,6 +41,7 @@ public class MainViewModel extends ViewModel {
             gistRepository.fetchGistCommentList(
                     gistID, username,
                     password, null);
+            // TODO: 22/10/2018 Convert this class to kotlin and set callback
         }
         return commentListMutableLiveData;
     }
@@ -56,7 +56,7 @@ public class MainViewModel extends ViewModel {
         gistRepository.createdGistComment(gistID, username, password, comment,
                 null);
 
-
+        // TODO: 22/10/2018 Convert this class to kotlin and set callback
         return addCommentMutableLiveData;
     }
 
