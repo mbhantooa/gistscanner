@@ -5,7 +5,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-internal class GistRepository @Inject constructor(private val gistApi: RetrofitGistDataSource) {
+class GistRepository @Inject constructor(private val gistApi: RetrofitGistDataSource) {
     fun fetchGistCommentList(gistID: String, username: String, password: String,
                              callback: NetworkCallback<List<GistComment>>) =
             gistApi.getGistCommentList(gistID, username, password, callback)

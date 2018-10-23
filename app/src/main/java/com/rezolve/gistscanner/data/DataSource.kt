@@ -27,7 +27,7 @@ internal interface IGistDataSource {
 }
 
 @Singleton
-internal class RetrofitGistDataSource @Inject constructor() : IGistDataSource, AnkoLogger {
+class RetrofitGistDataSource @Inject constructor() : IGistDataSource, AnkoLogger {
     override fun getGistCommentList(gistId: String,
                                     username: String,
                                     password: String,
