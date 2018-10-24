@@ -20,7 +20,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.rezolve.gistscanner.R;
-import com.rezolve.gistscanner.data.GistCommentListResponse;
 import com.rezolve.gistscanner.databinding.MainFragmentBinding;
 import com.rezolve.gistscanner.di.ActivityScoped;
 
@@ -29,9 +28,12 @@ import javax.inject.Inject;
 import dagger.android.support.DaggerFragment;
 import timber.log.Timber;
 
+import com.rezolve.gistscanner.model.GistComment;
 import com.rezolve.gistscanner.ui.util.RightDrawableOnTouchListener;
 import com.rezolve.gistscanner.ui.util.ViewModelFactory;
 import com.rezolve.gistscanner.viewmodel.MainViewModel;
+
+import java.util.List;
 
 @ActivityScoped
 public class MainFragment extends DaggerFragment {
@@ -136,9 +138,9 @@ public class MainFragment extends DaggerFragment {
     }
 
     private void fetchCommentList() {
-        LiveData<GistCommentListResponse> listResponseLiveData =
+        LiveData<List<GistComment>> gistCommentsLiveData =
                 mainViewModel.getCommentListResponse(gistId, USERNAME, PASSWORD);
-        if (listResponseLiveData.getValue() != null) {
+        if (gistCommentsLiveData.getValue() != null) {
             progressCircular.setVisibility(View.GONE);
         } else {
             progressCircular.setVisibility(View.VISIBLE);
@@ -149,10 +151,10 @@ public class MainFragment extends DaggerFragment {
                     progressCircular.setVisibility(View.GONE);
                     if (gistCommentListResponse != null) {
                         Timber.d(gistCommentListResponse.toString());
-                        if (gistCommentListResponse.isSuccessful()) {
+                        if (!gistCommentListResponse.isEmpty()) {
                             mainFragmentBinding
                                     .getAdapter()
-                                    .setGistCommentList(gistCommentListResponse.getResponse());
+                                    .setGistCommentList(gistCommentListResponse);
                         } else {
                             Toast.makeText(getContext(), R.string.gist_id_validation, Toast.LENGTH_SHORT).show();
                         }

@@ -5,9 +5,6 @@ import com.rezolve.gistscanner.data.retrofit.createService
 import com.rezolve.gistscanner.model.CommentRequest
 import com.rezolve.gistscanner.model.GistComment
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.debug
-import retrofit2.Call
-import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -23,64 +20,29 @@ import javax.inject.Singleton
  */
 internal interface IGistDataSource {
     fun getGistCommentList(gistId: String, username: String, password: String,
-                           callback: Callback<GistCommentListResponse>)
+                           callback: NetworkCallback<List<GistComment>>)
 
     fun createGistComment(gistId: String, username: String, password: String, comment: String,
-                          callback: Callback<CreateGistResponse>)
-}
-
-internal interface Callback<T> {
-    fun onComplete(response: T)
+                          callback: NetworkCallback<GistComment>)
 }
 
 @Singleton
-internal class RetrofitGistDataSource @Inject constructor() : IGistDataSource, AnkoLogger {
+class RetrofitGistDataSource @Inject constructor() : IGistDataSource, AnkoLogger {
     override fun getGistCommentList(gistId: String,
                                     username: String,
-                                    password: String, callback:
-                                    Callback<GistCommentListResponse>) {
+                                    password: String,
+                                    callback: NetworkCallback<List<GistComment>>) {
         val retrofitService = createService(
                 RetrofitService::class.java, username, password)
-        retrofitService.getGistComments(gistId)
-                .enqueue(object : retrofit2.Callback<List<GistComment>> {
-                    override fun onResponse(call: Call<List<GistComment>>,
-                                            response: Response<List<GistComment>>) {
-                        debug("List comment response $response")
-                        callback.let {
-                            if (response.isSuccessful) it.onComplete(GistCommentListResponse(
-                                    response.body()))
-                            else it.onComplete(GistCommentListResponse(null, Exception()))
-                        }
-                    }
-
-                    override fun onFailure(call: Call<List<GistComment>>, t: Throwable) {
-                        callback.onComplete(
-                                GistCommentListResponse(null, t)
-                        )
-                    }
-                })
-
+        Network.request(retrofitService.getGistComments(gistId), callback)
     }
 
     override fun createGistComment(gistId: String,
                                    username: String,
                                    password: String,
                                    comment: String,
-                                   callback: Callback<CreateGistResponse>) {
+                                   callback: NetworkCallback<GistComment>) {
         val retrofitService = createService(RetrofitService::class.java, username, password)
-        retrofitService.createComment(gistId, CommentRequest(comment))
-                .enqueue(object : retrofit2.Callback<GistComment> {
-                    override fun onResponse(call: Call<GistComment>, response: Response<GistComment>) {
-                        callback.let {
-                            if (response.isSuccessful) it.onComplete(CreateGistResponse(response.body()))
-                            else it.onComplete(CreateGistResponse(null, Exception()))
-                        }
-                    }
-
-                    override fun onFailure(call: Call<GistComment>, t: Throwable) {
-                        callback.onComplete(CreateGistResponse(null, t))
-                    }
-
-                })
+        Network.request(retrofitService.createComment(gistId, CommentRequest(comment)), callback)
     }
 }
